@@ -1,0 +1,19 @@
+{
+    "name": "connect-tus",
+    "description": "The tus resumable file upload protocol implemented as a connect middleware.",
+    "version": "0.0.5",
+    "main": "./lib",
+    "private": true,
+    "author": {
+        "name": "Luke Andersen-Quest",
+        "email": "luke.andersen.quest@gmail.com"
+    },
+    "dependencies": {
+        "mkdirp": "0.3.5"
+    },
+    "devDependencies": {
+        "coffee-script": "1.6.x",
+        "uglify-js": "2.2.x",
+        "vows": "0.7.x"
+    }
+}

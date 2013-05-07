@@ -12,3 +12,12 @@ logs
 results
 
 npm-debug.log
+
+# Project specific stuff
+.idea
+npm-debug.log
+node_modules
+
+# Ignore compiled coffeescript in src
+src/*.js
+util/*.js
