@@ -30,6 +30,9 @@ exports = module.exports = (options) ->
     return false unless fs.existsSync(filesPath + "/" +fid) && fs.existsSync(filesPath + "/" + fid + ".json")
     return fid
 
+  respond = (res, status, head) ->
+    res.writeHead status, head
+    res.end()
 
   # Create paths, if necessary.
   if !fs.existsSync filesPath
@@ -60,9 +63,8 @@ exports = module.exports = (options) ->
 
         # Gemerate location and write response.
         loc = "http://" + request.get("host") + uploadRoute + "/" + id
-        response.writeHead 201,
-          "Location": loc
-        response.end()
+        respond response, 201, "Location": loc
+
         if typeof callbackCreated == "function"
           callbackCreated id
 
@@ -76,9 +78,7 @@ exports = module.exports = (options) ->
         fs.stat filesPath + "/" +fid, (err, stats) ->
           if !err
             # Write response
-            response.writeHead 200,
-              "Offset": stats.size
-            response.end()
+            respond response, 200, "Offset": stats.size
           else
             return next()
 
@@ -93,8 +93,7 @@ exports = module.exports = (options) ->
             curOffset = stats.size
             offset = request.get "Offset"
             request.pipe( fs.createWriteStream( filesPath + "/" +fid, flags:"r+", start: parseInt(offset,10) ) )
-            response.writeHead 200
-            response.end()
+            respond response, 200
           else
             return next()
 
