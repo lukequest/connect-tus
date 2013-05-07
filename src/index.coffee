@@ -58,6 +58,7 @@ exports = module.exports = (options) ->
         # Create the upload metadata JSON file
         dta = JSON.stringify
           finalLength: request.get "Final-Length"
+          contentType: request.get "Content-Type"
           fileName: ""
         fs.createWriteStream( filesPath+"/"+id+".json", encoding: "UTF-8" ).end( dta )
 
